@@ -1,7 +1,7 @@
 import React from 'react'
 import Square from './Square'
 import Knight from './Knight'
-import { moveKnight } from './Game'
+import { canMoveKnight, moveKnight } from './Game'
 
 //現状のRenderSquareはループ回数とコマのX軸、Y軸を渡す。
 //ループ中にコマのX軸とY軸が一致したらKnightをレンダリングする。
@@ -33,8 +33,15 @@ function renderSquare(i, [knightX, knightY]) {
     return <div onClick={() => handleSquareClick(x, y)} style={{ width: '12.5%', height: '12.5%' }}>{<Square black={black}>{piece}</Square>}</div>
 }
 
+/*
 function handleSquareClick(toX, toY) {
     moveKnight(toX, toY)
+}
+*/
+function handleSquareClick(toX, toY) {
+    if (canMoveKnight(toX, toY)) {
+        moveKnight(toX, toY)
+    }
 }
 
 export default function Board({ knightPosition }) {
